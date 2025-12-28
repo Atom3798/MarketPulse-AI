@@ -6,7 +6,7 @@ MarketPulse AI builds a real-time market signal pipeline: scrape fresh financial
 
 ---
 
-## ✨ Features
+## Features
 - **Real-time scraping** (Selenium + BeautifulSoup) for quotes, fundamentals, and news signals
 - **Robust feature engineering**: returns, volatility, moving averages, rolling stats, lagged features
 - **Ensemble modeling** with **XGBoost** (plus Scikit-learn utilities)
@@ -15,4 +15,3 @@ MarketPulse AI builds a real-time market signal pipeline: scrape fresh financial
 
 ---
 
-## 📦 Project Structure
