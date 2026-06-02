@@ -6,9 +6,10 @@ class ReportGenerator:
         self.y_pred = y_pred
 
     def plot(self, save_path="forecast.png"):
-        plt.figure()
-        plt.plot(self.y_true, label="Actual")
-        plt.plot(self.y_pred, label="Predicted")
-        plt.legend()
-        plt.title("MarketPulse AI Forecast")
-        plt.savefig(save_path)
+        fig, ax = plt.subplots()
+        ax.plot(self.y_true.values, label="Actual")
+        ax.plot(self.y_pred, label="Predicted")
+        ax.legend()
+        ax.set_title("MarketPulse AI Forecast")
+        fig.savefig(save_path)
+        plt.close(fig)
