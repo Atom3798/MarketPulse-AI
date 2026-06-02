@@ -6,9 +6,13 @@ class DataManager:
         self.df = df.copy()
 
     def engineer_features(self) -> pd.DataFrame:
+        if "price" not in self.df.columns:
+            raise ValueError("DataFrame must contain a 'price' column")
         df = self.df.copy()
         df["return"] = df["price"].pct_change()
         df["ma5"] = df["price"].rolling(5).mean()
         df["volatility"] = df["return"].rolling(10).std()
         df = df.dropna()
+        if df.empty:
+            raise ValueError("No data remains after feature engineering (insufficient rows)")
         return df
