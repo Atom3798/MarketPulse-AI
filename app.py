@@ -296,7 +296,8 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     ticker_raw = st.text_input("Ticker Symbol", value="AAPL",
-                               placeholder="AAPL · MSFT · TSLA · NVDA")
+                               placeholder="AAPL · MSFT · TSLA · NVDA",
+                               max_chars=10)
     ticker = ticker_raw.upper().strip()
 
     period_map = {"6 Months": "6mo", "1 Year": "1y", "2 Years": "2y", "5 Years": "5y"}
@@ -355,6 +356,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Empty state ───────────────────────────────────────────────────────────────────
+if not ticker:
+    st.warning("Please enter a ticker symbol.")
+    st.stop()
+
 if not run:
     pills = "".join(
         f'<span style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.22);'
@@ -412,7 +417,7 @@ name        = info.get("longName", ticker)
 cur         = float(hist["Close"].iloc[-1])
 prev        = float(info.get("previousClose", hist["Close"].iloc[-2]))
 chg         = cur - prev
-chg_pct     = chg / prev * 100
+chg_pct     = (chg / prev * 100) if prev else 0.0
 up          = chg >= 0
 chg_col     = "#22c55e" if up else "#f43f5e"
 chg_arrow   = "▲" if up else "▼"
